@@ -6,4 +6,5 @@ import com.rzp.studyOneDay.Entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
+	Employee getByLastName(String lastName);
 }

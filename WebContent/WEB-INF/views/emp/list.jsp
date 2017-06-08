@@ -27,11 +27,11 @@
 	<c:forEach items="${page.content }" var="emp">
 		   <tr>
 		   	   <td>${emp.id }</td>
-		   	   <td>${emp.lastname }</td>
+		   	   <td>${emp.lastName }</td>
 		   	   <td>${emp.email }</td>
 		   	   <td>${emp.birth }</td>
 		   	   <td>${emp.createTime }</td>
-		   	   <td>${emp.dept.departmentName }</td>
+		   	   <td>${emp.department.departmentName }</td>
 		   	   <td><a href="">修改</a></td>
 		   	   <td><a href="">删除</a></td>
 		   </tr>

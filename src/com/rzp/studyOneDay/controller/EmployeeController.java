@@ -5,16 +5,24 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rzp.studyOneDay.Entity.Employee;
+import com.rzp.studyOneDay.service.DepartmentService;
 import com.rzp.studyOneDay.service.EmployeeService;
 
 @Controller
 public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
+	
+	@Autowired
+	DepartmentService departmentService;
 	@RequestMapping("/emps")
 	public String list(@RequestParam(value="pageNo",required=false,defaultValue="1")String pageNoStr,
 			Map<String,Object> map){
@@ -31,5 +39,29 @@ public class EmployeeController {
 		Page<Employee> page=employeeService.getPage(pageNo, 2);
 		map.put("page", page);
 		return "emp/list";
+	}
+	
+	@RequestMapping(value="/emp",method=RequestMethod.GET)
+	public String input(Map<String,Object> map){
+		map.put("departments", departmentService.getAll());
+		map.put("employee", new Employee());
+		return "emp/input";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/ajaxValidateLastName",method=RequestMethod.POST)
+	public String validateLastName(@RequestParam(value="lastName",required=true) String lastName){
+		Employee employee = employeeService.getByLastName(lastName);
+		if(employee == null){
+			return "0";
+		}else{
+			return "1";
+		}
+	}
+	
+	@RequestMapping(value="/emp",method=RequestMethod.POST)
+	public String save(Employee employee){
+		employeeService.save(employee);
+		return "redirect:/emps";
 	}
 }

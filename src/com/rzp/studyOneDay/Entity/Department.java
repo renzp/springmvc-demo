@@ -1,15 +1,17 @@
 package com.rzp.studyOneDay.Entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Cacheable
 @Table(name="DEPARTMENTS")
 @Entity
 public class Department {
 	private Integer id;
-	private String DepartmentName;
+	private String departmentName;
 	
 	@GeneratedValue
 	@Id
@@ -20,10 +22,11 @@ public class Department {
 		this.id = id;
 	}
 	public String getDepartmentName() {
-		return DepartmentName;
+		return departmentName;
 	}
 	public void setDepartmentName(String departmentName) {
-		DepartmentName = departmentName;
+		this.departmentName = departmentName;
 	}
+	
 	
 }

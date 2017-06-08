@@ -8,5 +8,7 @@
 </head>
 <body>
 <a href="emps">显示所有信息</a>
+<a href="emp">添加</a>
+
 </body>
 </html>
