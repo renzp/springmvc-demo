@@ -32,8 +32,8 @@
 		   	   <td>${emp.birth }</td>
 		   	   <td>${emp.createTime }</td>
 		   	   <td>${emp.department.departmentName }</td>
-		   	   <td><a href="">修改</a></td>
-		   	   <td><a href="">删除</a></td>
+		   	   <td><a href="${pageContext.request.contextPath}/emp/${emp.id}">修改</a></td>
+		   	   <td><a href="${pageContext.request.contextPath}/emp/${emp.id}">删除</a></td>
 		   </tr>
 	</c:forEach>
 		   <tr>

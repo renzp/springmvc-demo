@@ -64,4 +64,18 @@ public class EmployeeController {
 		employeeService.save(employee);
 		return "redirect:/emps";
 	}
+	
+	@RequestMapping(value="/emp/{id}", method=RequestMethod.GET)
+	public String input(@PathVariable("id") Integer id, Map<String, Object> map){
+		Employee employee = employeeService.get(id);
+		map.put("employee", employee);
+		map.put("departments", departmentService.getAll());
+		return "emp/input";
+	}
+	
+	@RequestMapping(value="/emp/{id}",method=RequestMethod.PUT)
+	public String update(Employee employee){
+		employeeService.save(employee);
+		return "redirect:/emps";
+	}
 }

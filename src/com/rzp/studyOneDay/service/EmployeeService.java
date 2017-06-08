@@ -35,4 +35,8 @@ public class EmployeeService {
 		employeeRepository.saveAndFlush(employee);
 	}
 	
+	@Transactional(readOnly=true)
+	public Employee get(Integer id){
+		return employeeRepository.findOne(id);
+	}
 }
