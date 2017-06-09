@@ -73,9 +73,25 @@ public class EmployeeController {
 		return "emp/input";
 	}
 	
-	@RequestMapping(value="/emp/{id}",method=RequestMethod.PUT)
+	@RequestMapping(value="/emp/{id}",method=RequestMethod.POST)
 	public String update(Employee employee){
 		employeeService.save(employee);
+		return "redirect:/emps";
+	}
+	
+	@ModelAttribute
+	public void getEmployee(@RequestParam(value="id",required=false) Integer id,
+			Map<String, Object> map){
+		if(id != null){
+			Employee employee = employeeService.get(id);
+			employee.setDepartment(null);
+			map.put("employee", employee);
+		}
+	}
+	
+	@RequestMapping(value="/emp/{id}",method=RequestMethod.DELETE)
+	public String delete(@PathVariable("id") Integer id){
+		employeeService.delete(id);
 		return "redirect:/emps";
 	}
 }
